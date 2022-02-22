@@ -5,3 +5,4 @@ coverage/
 test/.DS_Store
 .idea/
 junit.xml
+package-lock.json
