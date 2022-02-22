@@ -12,7 +12,6 @@ let jokesEndpoint: Jokes;
 
 beforeEach(async (): Promise<void> => {
   mock = new MockAdapter(axios);
-  mock;
   jokesEndpoint = new Jokes();
 });
 
@@ -37,7 +36,7 @@ describe("Unit test jokes endpoint class", (): void => {
     expect(result.data.length).toBeGreaterThanOrEqual(1);
   });
 
-  it("Search jokes", async (): Promise<void> => {
+  it("Search jokes with shotgun in the query", async (): Promise<void> => {
     mock.onGet().reply(searchJokesAxiosResponse);
     const response = await jokesEndpoint.searchJokes("shotgun");
     expect(response.status).toBe(200);

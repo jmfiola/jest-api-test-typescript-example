@@ -9,7 +9,6 @@ describe("Jokes endpoint", (): void => {
   it("Get a random joke", async (): Promise<void> => {
     const response = await jokes.getRandomJoke();
     expect(response.status).toBe(200);
-    expect(response.statusText).toBe("OK");
     expect(response.data.created_at).toBeDefined();
     expect(response.data.icon_url).toBeDefined();
     expect(response.data.id).toBeDefined();
@@ -22,12 +21,11 @@ describe("Jokes endpoint", (): void => {
   it("Get joke categories", async (): Promise<void> => {
     const response = await jokes.getJokeCategories();
     expect(response.status).toBe(200);
-    expect(response.statusText).toBe("OK");
     expect(response.data).toBeDefined();
     expect(response.data.length).toBeGreaterThanOrEqual(1);
   });
 
-  it("Search jokes", async (): Promise<void> => {
+  it("Search jokes with shotgun in the query", async (): Promise<void> => {
     const response = await jokes.searchJokes("shotgun");
     expect(response.status).toBe(200);
     expect(response.data.total).toBeGreaterThanOrEqual(1);
