@@ -171,6 +171,8 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 Project Link: [https://github.com/jmfiola/jest-api-test-typescript-example](https://github.com/jmfiola/jest-api-test-typescript-example)
 
+Email: jmfiola21@gmail.com
+
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 
