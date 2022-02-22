@@ -36,22 +36,23 @@ export class RestClient {
     rejectUnauthorized: false,
   });
 
-  static async getToken() {
-    RestClient.authToken = "asdf";
+  // Not returning an actual auth token for this example project.
+  // Just showing how it can be done!
+  static async getToken(requestHeaders: object) {
+    requestHeaders["Authorization"] = `asdf`;
   }
 
-  public async callEndpoint(
-    url: string,
-    method: Method,
-    authToken?: string,
-    data?: object,
-    params?: object,
-    headers?: any,
-    additionalConfigs?: AxiosRequestConfig
-  ): Promise<AxiosResponse> {
+  public async callEndpoint({
+    route,
+    method,
+    authToken,
+    headers,
+    data,
+    additionalConfigs,
+    params,
+  }: IAxiosCallEndpointArgs): Promise<AxiosResponse> {
     let response;
     let responseLog = "Response: ";
-
     let requestHeaders = headers;
 
     // if headers are not passed in, use the default headers
@@ -68,25 +69,26 @@ export class RestClient {
         },
       };
     }
+
     // if we have not set the auth headers yet, set them
     else if (!requestHeaders.Authorization) {
-      await RestClient.getToken();
+      await RestClient.getToken(requestHeaders);
     }
 
     log.debug(
-      RestClient.prepareLogRecord(
-        url,
+      RestClient.prepareLogRecord({
+        route,
         method,
-        requestHeaders,
+        headers: requestHeaders,
         data,
         additionalConfigs,
-        params
-      )
+        params,
+      })
     );
 
     await this.axiosInstance
       .request({
-        url,
+        url: route,
         method,
         data,
         headers: requestHeaders,
@@ -109,114 +111,112 @@ export class RestClient {
     return response;
   }
 
-  public async sendPost(
-    url: string,
-    authToken?: string,
-    data?: object,
-    params?: object,
-    headers?: any,
-    additionalConfigs?: AxiosRequestConfig
-  ): Promise<any> {
-    return this.callEndpoint(
-      url,
-      "POST",
+  public async sendPost({
+    route,
+    authToken,
+    data,
+    params,
+    headers,
+    additionalConfigs,
+  }: IAxiosHttpRequestArgs): Promise<any> {
+    return this.callEndpoint({
+      route,
+      method: "POST",
       authToken,
       data,
       params,
       headers,
-      additionalConfigs
-    );
+      additionalConfigs,
+    });
   }
 
-  public async sendGet(
-    url: string,
-    authToken?: string,
-    params?: object,
-    headers?: any,
-    additionalConfigs?: AxiosRequestConfig
-  ): Promise<any> {
-    return this.callEndpoint(
-      url,
-      "GET",
+  public async sendGet({
+    route,
+    authToken,
+    params,
+    headers,
+    additionalConfigs,
+  }: IAxiosHttpRequestArgs): Promise<any> {
+    return this.callEndpoint({
+      route,
+      method: "GET",
       authToken,
-      null,
       params,
       headers,
-      additionalConfigs
-    );
+      additionalConfigs,
+    });
   }
 
-  public async sendDelete(
-    url: string,
-    authToken?: string,
-    params?: object,
-    headers?: any,
-    additionalConfigs?: AxiosRequestConfig
-  ): Promise<any> {
-    return this.callEndpoint(
-      url,
-      "DELETE",
+  public async sendDelete({
+    route,
+    authToken,
+    params,
+    headers,
+    additionalConfigs,
+  }: IAxiosHttpRequestArgs): Promise<any> {
+    return this.callEndpoint({
+      route,
+      method: "DELETE",
       authToken,
-      null,
       params,
       headers,
-      additionalConfigs
-    );
+      additionalConfigs,
+    });
   }
 
-  public async sendPatch(
-    url: string,
-    authToken?: string,
-    data?: object,
-    headers?: any,
-    additionalConfigs?: AxiosRequestConfig
-  ): Promise<any> {
-    return this.callEndpoint(
-      url,
-      "PATCH",
+  public async sendPatch({
+    route,
+    authToken,
+    data,
+    headers,
+    additionalConfigs,
+  }: IAxiosHttpRequestArgs): Promise<any> {
+    return this.callEndpoint({
+      route,
+      method: "PATCH",
       authToken,
       data,
-      null,
       headers,
-      additionalConfigs
-    );
+      additionalConfigs,
+    });
   }
 
-  public async sendPut(
-    url: string,
-    authToken?: string,
-    data?: object,
-    headers?: any,
-    additionalConfigs?: AxiosRequestConfig
-  ): Promise<any> {
-    return this.callEndpoint(
-      url,
-      "PUT",
+  public async sendPut({
+    route,
+    authToken,
+    data,
+    headers,
+    additionalConfigs,
+  }: IAxiosHttpRequestArgs): Promise<any> {
+    return this.callEndpoint({
+      route,
+      method: "PUT",
       authToken,
       data,
-      null,
       headers,
-      additionalConfigs
-    );
+      additionalConfigs,
+    });
   }
 
-  private static prepareLogRecord(
-    url: string,
-    method: Method,
-    headers?: any,
-    data?: object,
-    additionalConfigs?: AxiosRequestConfig,
-    params?: object
-  ): string {
-    let logRecord = `Request: ${method} ${url}`;
+  private static prepareLogRecord({
+    route,
+    method,
+    headers,
+    data,
+    additionalConfigs,
+    params,
+  }: IAxiosCallEndpointArgs): string {
+    let logRecord = `Request: ${method} ${route}`;
     if (isSet(headers))
       logRecord = `${logRecord}\nHeaders: ${stringify(headers)}`;
 
     if (isSet(params)) logRecord = `${logRecord}\nParams: ${stringify(params)}`;
-    if (isSet(additionalConfigs))
+
+    if (isSet(additionalConfigs)) {
       logRecord = `${logRecord}\nAdditional Configuration: ${stringify(
         additionalConfigs
       )}`;
+    }
 
     if (isSet(data)) {
       const jsonData = stringify(data);
@@ -225,7 +225,19 @@ export class RestClient {
         jsonData === undefined ? "Some data, not JSON!" : jsonData
       }`;
     }
-
     return logRecord;
   }
+}
+
+export interface IAxiosHttpRequestArgs {
+  route: string;
+  authToken?: string;
+  data?: object;
+  params?: object;
+  headers?: any;
+  additionalConfigs?: AxiosRequestConfig;
+}
+
+export interface IAxiosCallEndpointArgs extends IAxiosHttpRequestArgs {
+  method: Method;
 }

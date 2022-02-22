@@ -12,14 +12,17 @@ export default class Jokes extends AEndpoint {
     if (category) {
       params = { category: category };
     }
-    return this.restClient.sendGet("/random", null, params);
+    return this.restClient.sendGet({ route: "/random", params });
   }
 
   public async getJokeCategories(): Promise<AxiosResponse> {
-    return this.restClient.sendGet("/categories");
+    return this.restClient.sendGet({ route: "/categories" });
   }
 
   public async searchJokes(query: string): Promise<AxiosResponse> {
-    return this.restClient.sendGet("/search", null, { query: query });
+    return this.restClient.sendGet({
+      route: "/search",
+      params: { query: query },
+    });
   }
 }

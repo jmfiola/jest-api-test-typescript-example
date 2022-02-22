@@ -25,7 +25,7 @@ export abstract class AEndpoint {
 
   protected url: string;
 
-  protected restClient: RestClient;
+  public restClient: RestClient;
 
   protected serviceName: string;
 }
