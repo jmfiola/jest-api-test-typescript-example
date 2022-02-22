@@ -28,6 +28,12 @@ describe("Unit test jokes endpoint class", (): void => {
     expect(result.data.value).toBeDefined();
   });
 
+  it("Get a random joke throws an error", async (): Promise<void> => {
+    mock.onGet().networkError();
+    const result = await jokesEndpoint.getRandomJoke();
+    expect(result).toBeUndefined();
+  });
+
   it("Get joke categories", async (): Promise<void> => {
     mock.onGet().reply(getJokeCategoriesAxiosResponse);
     const result = await jokesEndpoint.getJokeCategories();
@@ -36,14 +42,25 @@ describe("Unit test jokes endpoint class", (): void => {
     expect(result.data.length).toBeGreaterThanOrEqual(1);
   });
 
+  it("Get joke categories throws an error", async (): Promise<void> => {
+    mock.onGet().networkError();
+    const result = await jokesEndpoint.getJokeCategories();
+    expect(result).toBeUndefined();
+  });
+
   it("Search jokes with shotgun in the query", async (): Promise<void> => {
     mock.onGet().reply(searchJokesAxiosResponse);
     const response = await jokesEndpoint.searchJokes("shotgun");
     expect(response.status).toBe(200);
-    expect(response.statusText).toBe("OK");
     expect(response.data.total).toBeGreaterThanOrEqual(1);
     response.data.result.forEach((joke) => {
       expect(joke.value.toLowerCase()).toContain("shotgun");
     });
+  });
+
+  it("Search jokes throws an error", async (): Promise<void> => {
+    mock.onGet().networkError();
+    const result = await jokesEndpoint.searchJokes("shotgun");
+    expect(result).toBeUndefined();
   });
 });

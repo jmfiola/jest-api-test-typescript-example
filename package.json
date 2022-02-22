@@ -10,7 +10,8 @@
     "test": "jest --forceExit --detectOpenHandles --passWithNoTests",
     "test-ci": "npm run build && npm run test -- --ci --coverage",
     "build": "tsc",
-    "lint": "eslint --fix --ext .js,.ts,.tsx . && prettier --write .",
+    "lint": "eslint --ext .js,.ts,.tsx .",
+    "lint:fix": "npm run lint -- --fix",
     "cleanup": "rm -rf node_modules; rm -rf dist; npm i"
   },
   "repository": {
