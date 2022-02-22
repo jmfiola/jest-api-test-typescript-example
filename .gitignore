@@ -1,0 +1,7 @@
+node_modules
+dist
+coverage/
+.DS_Store
+test/.DS_Store
+.idea/
+junit.xml

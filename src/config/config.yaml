@@ -1,0 +1,11 @@
+common:
+  request_headers:
+    Accept: application/json
+    Content-Type: application/json
+local:
+  api_base_url: http://localhost:8080
+  log_level: debug
+prod:
+  api_base_url: https://api.chucknorris.io
+  log_level: debug
+  time_zone: utc
