@@ -67,10 +67,10 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-This is a basic project with two main ideas:
-1. Endpoint functionality should be wrapped by a class which is abstracted as much as possible 🌌
+This is a basic test framework that hits the [Chuck Norris Jokes API](https://api.chucknorris.io/) following 3 core values:
+1. Endpoint functionality should be wrapped by a class method which is abstracted as much as possible 🌌
 
-2. Class functionality should be unit tested 🧪
+2. Those class methods should be unit tested 🧪
 
 3. Actual API tests will then import those class methods to interact with the live API 🔎
 
