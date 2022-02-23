@@ -9,6 +9,7 @@
 *** https://www.markdownguide.org/basic-syntax/#reference-style-links
 -->
 [![Contributors][contributors-shield]][contributors-url]
+[![Build Status][build-shield]][build-url]
 [![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
@@ -187,6 +188,8 @@ Email: jmfiola21@gmail.com
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 [contributors-shield]: https://img.shields.io/github/contributors/jmfiola/jest-api-test-typescript-example.svg?style=for-the-badge
 [contributors-url]: https://github.com/jmfiola/jest-api-test-typescript-example/graphs/contributors
+[build-shield]: https://img.shields.io/github/workflow/status/jmfiola/jest-api-test-typescript-example/CI.svg?style=for-the-badge
+[build-url]: https://github.com/jmfiola/jest-api-test-typescript-example/actions
 [forks-shield]: https://img.shields.io/github/forks/jmfiola/jest-api-test-typescript-example.svg?style=for-the-badge
 [forks-url]: https://github.com/jmfiola/jest-api-test-typescript-example/network/members
 [stars-shield]: https://img.shields.io/github/stars/jmfiola/jest-api-test-typescript-example.svg?style=for-the-badge
