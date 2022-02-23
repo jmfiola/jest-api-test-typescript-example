@@ -9,7 +9,7 @@
   "scripts": {
     "test": "jest --forceExit --detectOpenHandles --passWithNoTests",
     "unit:test": "npm run test unit_test -- --coverage",
-    "unit:test:ci" : "npm test unit_test -- --ci --coverage && npm run build",
+    "unit:test:ci" : "npm test unit_test -- --ci && npm run build",
     "functional:test": "npm run test functional_test --forceExit --detectOpenHandles --passWithNoTests",
     "build": "tsc",
     "lint": "eslint --ext .js,.ts,.tsx .",
