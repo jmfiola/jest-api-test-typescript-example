@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
   
 jobs:
-  build:
+  pipeline:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -16,11 +16,10 @@ jobs:
         with:
           node-version: '16'
 
-      - name: lint 
+      - name: Lint 
         run: |
           npm install
           npm run lint
 
-      - name: Build
-        run: |
-          npm run build
+      - name: Unit Test and Build
+        run: npm run unit:test:ci

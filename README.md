@@ -105,13 +105,10 @@ You will want the latest version of npm installed. For reference, this project w
    git clone https://github.com/jmfiola/jest-api-test-typescript-example.git
    ```
 3. Install NPM packages
-   ```sh
+   ```npm
    npm install
    ```
-4. Run tests
-   ```sh
-   npm run test
-   ```
+
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -119,6 +116,15 @@ You will want the latest version of npm installed. For reference, this project w
 
 <!-- USAGE EXAMPLES -->
 ## Usage
+
+1. Run the unit tests for the framework with code coverage
+   ```npm
+   npm run unit:test
+   ```
+2. Run the functional tests which actually hit the live Chuck Norris API
+   ```npm
+   npm run functional:test
+   ```
 
 You can use this framework as a starting point for whatever API tests you would like to run. This framework allows for the flexibility of running tests which have free range with what headers they use, what routes they call, etc. whilst also providing easy-to-use, reusable, unit tested class methods. This makes the tests a lot more accessible to test writers and framework maintainers!
 

@@ -70,7 +70,7 @@ describe("Jokes endpoint", (): void => {
     expect(response.data.updated_at).toBeDefined();
     expect(response.data.url).toBeDefined();
     expect(response.data.value).toBeDefined();
-    expect(response.data.value).toContain("Chuck Norris");
+    expect(response.data.value).toContain("Chuck");
   });
 
   it("Hit jokes endpoint using a method that is not allowed", async (): Promise<void> => {
